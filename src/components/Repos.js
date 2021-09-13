@@ -40,14 +40,32 @@ const Repos = () => {
     })
     .slice(0, 5);
 
-  console.log(mostPopular);
+  // Stars, forks
+
+  const { stars, forks } = repos.reduce(
+    (total, item) => {
+      const { stargazers_count, forks, name } = item;
+      total.stars[stargazers_count] = { label: name, value: stargazers_count };
+      total.forks[forks] = { label: name, value: forks };
+      return total;
+    },
+    { stars: {}, forks: {} }
+  );
+  const mostStars = Object.values(stars)
+    .sort((a, b) => {
+      return b.value - a.value;
+    })
+    .slice(0, 5);
+
+  const mostForks = Object.values(forks).slice(-5).reverse();
 
   return (
     <section className="section">
       <Wrapper className="section-center">
         <Pie3D data={mostUsed} />
-        <div></div>
+        <Column3D data={mostStars} />
         <Doughnut2D data={mostPopular} />
+        <Bar3D data={mostForks} />
       </Wrapper>
     </section>
   );
