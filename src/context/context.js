@@ -26,6 +26,32 @@ const GithubProvider = ({ children }) => {
 
     if (response) {
       setGithubUser(response.data);
+
+      const { login, followers_url } = response.data;
+
+      //repos
+      // api.github.com/users/username/repos?per_page=100
+
+      //followers
+      // https://api.github.com/users/username/followers
+
+      // Display value only if both requests are completed.
+
+      await Promise.allSettled([
+        axios(`${rootUrl}/users/${login}/repos?per_page=100`),
+        axios(`${followers_url}?per_page=100`),
+      ])
+        .then((result) => {
+          const [repo, follower] = result;
+          const status = "fulfilled";
+          if (repo.status === status) {
+            setRepo(repo.value.data);
+          }
+          if (follower.status === status) {
+            setFollowers(follower.value.data);
+          }
+        })
+        .catch((err) => console.log(err));
     } else {
       toggleError(true, "There is no user with that username");
     }
