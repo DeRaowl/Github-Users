@@ -1,8 +1,8 @@
 import React from "react";
-import { GithubContext, GithubProvider } from "../context/context";
+import { GithubContext } from "../context/context";
 import styled from "styled-components";
 import { GoRepo, GoGist } from "react-icons/go";
-import { FiUsers, FiUserPlus, FiUser } from "react-icons/fi";
+import { FiUsers, FiUserPlus } from "react-icons/fi";
 
 const UserInfo = () => {
   //Destructure Object
@@ -27,7 +27,7 @@ const UserInfo = () => {
     },
     {
       id: 3,
-      icon: <FiUser />,
+      icon: <FiUsers />,
       label: "following",
       value: following,
       color: "purple",

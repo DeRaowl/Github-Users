@@ -16,17 +16,6 @@ const Card = () => {
     },
   } = React.useContext(GithubContext);
 
-  console.log(
-    avatar_url,
-    html_url,
-    name,
-    company,
-    blog,
-    location,
-    bio,
-    twitter_username
-  );
-
   return (
     <Wrapper>
       <header>

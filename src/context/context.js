@@ -73,9 +73,7 @@ const GithubProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    checkRequests();
-  }, []);
+  useEffect(checkRequests, []);
 
   const toggleError = (show = false, msg = "") => {
     setError({ show, msg });
